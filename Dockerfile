@@ -31,4 +31,4 @@ bot.on("exit", code => {
 });
 EOF
 
-CMD ["./jnbot"]
+CMD ["./jnbot", "serve"]

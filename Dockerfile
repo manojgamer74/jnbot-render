@@ -18,17 +18,20 @@ const { spawn } = require("child_process");
 const port = process.env.PORT || 10000;
 
 http.createServer((req, res) => {
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end("JNbot is running");
-}).listen(port, "0.0.0.0");
+  res.writeHead(200, {"Content-Type": "text/plain"});
+  res.end("JNbot is running");
+}).listen(port, "0.0.0.0", () => {
+  console.log(`HTTP server listening on ${port}`);
+});
 
-const bot = spawn("./jnbot", ["--jnbot-server"], {
-    stdio: "inherit"
+const bot = spawn("./jnbot", ["serve", "--remote-access"], {
+  stdio: "inherit"
 });
 
 bot.on("exit", code => {
-    console.log("JNbot exited:", code);
+  console.log("JNbot exited:", code);
+  process.exit(code || 0);
 });
 EOF
 
-CMD ["./jnbot", "serve", "--remote-access"]
+CMD ["node", "server.js"]

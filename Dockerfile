@@ -31,4 +31,4 @@ bot.on("exit", code => {
 });
 EOF
 
-CMD ["./jnbot", "serve"]
+CMD ["./jnbot", "serve", "--remote-access"]
